@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sylvex - Premium AI Past Paper Analyzer & Smart Study Planner">
+    <title>Sylvex | AI Intelligence for Exam Mastery</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- External Assets -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dark-mode">
+    <!-- Impressive Enhancements -->
+    <div id="cursor-glow"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div id="achievement-popup" class="achievement-popup">
+        <div class="achievement-icon">
+            <i data-lucide="zap"></i>
+        </div>
+        <div>
+            <div style="font-weight: 800; font-family: 'Outfit'; font-size: 1.1rem">Neural Link Established</div>
+            <div style="font-size: 0.8rem; color: var(--text-dim)">Intelligence synthesis complete.</div>
+        </div>
+    </div>
+
+    <!-- Background Orchestration -->
+    <div class="bg-orchestration">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon-wrapper">
+                    <i data-lucide="brain-circuit"></i>
+                </div>
+                <span class="logo-text">Sylvex</span>
+            </a>
+            <div class="nav-links">
+                <a href="#analyzer" class="nav-link active">Analyzer</a>
+                <a href="#dashboard" class="nav-link">Insights</a>
+                <a href="#planner" class="nav-link">Planner</a>
+                <button class="btn btn-primary btn-glow">Get Premium</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero & Upload Section -->
+        <section id="analyzer" class="hero">
+            <div class="container">
+                <div class="fade-up">
+                    <span class="hero-tag">AI-Powered Exam Intelligence</span>
+                    <h1 class="hero-title">Master Your Exams with <br><span class="gradient-text">Pattern
+                            Intelligence</span></h1>
+                    <p class="hero-desc">Upload your past papers and syllabus. Let Sylvex decode the trends, rank
+                        high-yield topics, and build your optimized study roadmap.</p>
+                </div>
+
+                <div class="upload-grid fade-up" style="animation-delay: 0.2s">
+                    <!-- Main Paper Upload -->
+                    <div class="glass-card upload-box" id="paper-dropzone">
+                        <input type="file" id="paper-input" multiple hidden>
+                        <div class="upload-icon-circle">
+                            <i data-lucide="upload-cloud" width="32" height="32"></i>
+                        </div>
+                        <div class="upload-text">
+                            <h3>Drop Past Papers</h3>
+                            <p class="text-dim mt-4">PDF, JPEG, or PNG supported (Multiple files)</p>
+                        </div>
+                        <button class="btn btn-secondary"
+                            onclick="document.getElementById('paper-input').click()">Browse Files</button>
+                        <div id="paper-file-list" class="file-preview-list"></div>
+                    </div>
+
+                    <!-- Syllabus Upload -->
+                    <div class="glass-card upload-box" id="syllabus-dropzone" style="padding: 2.5rem 1.5rem">
+                        <input type="file" id="syllabus-input" hidden>
+                        <div class="upload-icon-circle" style="width: 60px; height: 60px; color: var(--secondary)">
+                            <i data-lucide="book-open" width="24" height="24"></i>
+                        </div>
+                        <div class="upload-text">
+                            <h3>Official Syllabus</h3>
+                            <p class="text-dim mt-4">Connect your curriculum</p>
+                        </div>
+                        <button class="btn btn-secondary"
+                            onclick="document.getElementById('syllabus-input').click()">Upload Syllabus</button>
+                        <div id="syllabus-file-list" class="file-preview-list"></div>
+                    </div>
+                </div>
+
+                <div class="action-center fade-up" style="animation-delay: 0.4s">
+                    <button id="analyze-btn" class="btn btn-primary btn-glow btn-lg"
+                        style="padding: 1.2rem 3.5rem; font-size: 1.1rem" disabled>
+                        <span>Initiate AI Analysis</span>
+                        <i data-lucide="sparkles"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Dashboard -->
+        <section id="dashboard" class="hidden">
+            <div class="container">
+                <div class="section-header mb-4">
+                    <h2 class="gradient-text" style="font-size: 2.5rem">Intelligence Dashboard</h2>
+                    <p class="text-dim">Synthesized patterns from historical data</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Row 1: Key Stats -->
+                    <div class="col-4 glass-card stat-card fade-up">
+                        <span class="stat-label">Readiness Score</span>
+                        <div class="stat-value gradient-text" id="readiness-value">--%</div>
+                        <p class="text-dim">Historical trend alignment</p>
+                    </div>
+                    <div class="col-4 glass-card stat-card fade-up" style="animation-delay: 0.1s">
+                        <span class="stat-label">High Yield Topics</span>
+                        <div class="stat-value" id="topic-count">--</div>
+                        <p class="text-dim">Significant patterns found</p>
+                    </div>
+                    <div class="col-4 glass-card stat-card fade-up" style="animation-delay: 0.2s">
+                        <span class="stat-label">Coverage Gap</span>
+                        <div class="stat-value" style="color: var(--secondary)" id="coverage-gap">--%</div>
+                        <p class="text-dim">Syllabus areas missed</p>
+                    </div>
+
+                    <!-- Row 2: Trend Chart (Full Width) -->
+                    <div class="col-12 glass-card fade-up" style="animation-delay: 0.3s">
+                        <h3 class="mb-4">Historical Topic Frequency</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Rankings (Full Width) -->
+                    <div class="col-12 glass-card fade-up" style="animation-delay: 0.4s">
+                        <h3 class="mb-4">High-Yield Topic Rankings</h3>
+                        <div id="topic-ranking-list" class="ranking-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Supporting Insights (Split Width) -->
+                    <div class="col-6 glass-card fade-up" style="animation-delay: 0.5s">
+                        <h3>Difficulty Distribution</h3>
+                        <div class="chart-wrapper" style="height: 300px">
+                            <canvas id="difficultyChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="col-6 glass-card fade-up" style="animation-delay: 0.6s">
+                        <div id="heatmap-target">
+                            <!-- Heatmap will be moved here by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Planner -->
+        <section id="planner" class="hidden">
+            <div class="container">
+                <div class="section-header mb-4">
+                    <h2 class="gradient-text" style="font-size: 2.5rem">Smart Study Planner</h2>
+                    <p class="text-dim">Optimized roadmap based on your exam date and historical yield</p>
+                </div>
+
+                <div class="planner-layout">
+                    <!-- Controls -->
+                    <div class="glass-card fade-up">
+                        <h3>Plan Configuration</h3>
+                        <div class="mt-4">
+                            <div class="input-group">
+                                <label>Target Exam Date</label>
+                                <input type="date" id="exam-date-input" class="glass-input">
+                            </div>
+                            <div class="input-group">
+                                <label>Daily Study Commitment</label>
+                                <div style="display:flex; align-items:center; gap:1rem">
+                                    <input type="range" min="1" max="12" value="4" class="w-full" id="hours-range">
+                                    <span id="hours-display" style="min-width: 40px">4h</span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>Study Intensity</label>
+                                <div class="intensity-group" id="intensity-buttons">
+                                    <button class="intensity-btn" data-value="light">Light</button>
+                                    <button class="intensity-btn active" data-value="moderate">Moderate</button>
+                                    <button class="intensity-btn" data-value="intense">Intense</button>
+                                </div>
+                            </div>
+                            <button id="generate-plan-btn" class="btn btn-primary w-full mt-4">Regenerate
+                                Roadmap</button>
+                        </div>
+                    </div>
+
+                    <!-- Schedule View -->
+                    <div class="schedule-view fade-up" style="animation-delay: 0.2s">
+                        <div class="calendar-scroll" id="calendar-view">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <div id="day-detail-card" class="glass-card mt-4" style="border-left: 4px solid var(--primary)">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container"
+        style="padding: 4rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem">
+        <p>&copy; 2026 Sylvex AI. Engineered for Academic Excellence.</p>
+    </footer>
+
+    <!-- AI Assistant UI -->
+    <div class="ai-assistant-fab" id="ai-fab">
+        <i data-lucide="sparkles"></i>
+    </div>
+
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <div style="display:flex; align-items:center; gap:0.75rem">
+                <i data-lucide="bot" style="color:var(--primary-light)"></i>
+                <h3 style="margin:0; font-size:1rem">Sylvex AI Helper</h3>
+            </div>
+            <i data-lucide="x" style="cursor:pointer; color:var(--text-dim)" id="close-chat"></i>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message ai">
+                Hello! I'm your Sylvex AI assistant. I can help you understand your exam patterns or guide you through
+                your study plan. How can I help today?
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <button class="voice-btn" id="voice-btn">
+                <i data-lucide="mic"></i>
+            </button>
+            <input type="text" class="chat-input" placeholder="Ask anything..." id="chat-input">
+            <button class="btn btn-primary" style="padding: 0.5rem; border-radius: 50%" id="send-chat">
+                <i data-lucide="send" size="16"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Core Engine -->
+    <script src="js/main.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/assistant.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    <!-- Global Drag & Drop Overlay -->
+    <div id="global-drop-zone" class="global-drop-overlay">
+        <div class="drop-content">
+            <i data-lucide="file-up" size="64"></i>
+            <h2>Drop Papers Anywhere</h2>
+            <p>Ready to analyze your PDF patterns</p>
+        </div>
+    </div>
+</body>
+</html>
