@@ -92,8 +92,6 @@ Sylvex features a **premium dark-mode design system**:
 2. **Execute** `run_local.bat` (Windows) or `run_local.sh` (Mac/Linux).
 3. **Open** `http://localhost:8000` in a Chrome/Edge/Safari browser (required for Voice features).
 
----
-**Demo Video Link:** https://drive.google.com/drive/folders/1jMMm6WoKyp15FMbTMIcvLcq4R4M7G4QU?usp=drive_link
 <p align="center">
   <b>Sylvex</b> — <i>Engineered for Academic Excellence.</i>
 </p>
